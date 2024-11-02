@@ -26,8 +26,8 @@ WHERE po.ExpectedDeliveryDate >= '2013-01-01'
   AND dm.DeliveryMethodName IN ('Air Freight', 'Refrigerated Air Freight')
   AND po.IsOrderFinalized = 1;
 
--- Query 5: Last ten sales with customer name and salesperson name
-SELECT TOP 10 o.OrderID, c.CustomerName, p.FullName AS Salesperson
+-- Query 5: Last ten sales with customer name and salesperson name (with ties)
+SELECT TOP 10 WITH TIES o.OrderID, c.CustomerName, p.FullName AS Salesperson
 FROM Sales.Orders o
 JOIN Sales.Customers c ON o.CustomerID = c.CustomerID
 JOIN Application.People p ON o.SalespersonPersonID = p.PersonID
